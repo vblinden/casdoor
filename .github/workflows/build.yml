@@ -162,15 +162,15 @@ jobs:
           new_array=(${new_version//\./ })
 
           if [ ${old_array[0]} != ${new_array[0]} ]
-          then 
+          then
               echo ::set-output name=push::'true'
           elif [ ${old_array[1]} != ${new_array[1]} ]
-          then 
+          then
               echo ::set-output name=push::'true'
-          
+
           else
               echo ::set-output name=push::'false'
-          
+
           fi
 
       - name: Set up QEMU
@@ -195,7 +195,7 @@ jobs:
         with:
           context: .
           target: STANDARD
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: casbin/casdoor:${{steps.get-current-tag.outputs.tag }},casbin/casdoor:latest
 
@@ -205,6 +205,6 @@ jobs:
         with:
           context: .
           target: ALLINONE
-          platforms: linux/amd64
+          platforms: linux/amd64,lunux/arm64
           push: true
           tags: casbin/casdoor-all-in-one:${{steps.get-current-tag.outputs.tag }},casbin/casdoor-all-in-one:latest
